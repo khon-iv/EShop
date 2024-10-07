@@ -2,5 +2,9 @@
 
 public enum ProductCategories
 {
-    
+    ForHome,
+    ForBeautyAndHealth,
+    Phone,
+    TV,
+    PC
 }

@@ -1,9 +1,12 @@
-﻿namespace Core;
+﻿using System.Collections.Generic;
+using System.Linq;
+
+namespace Core;
 
 public static class ServiceCatalog
 {
     private static readonly List<Service> Services = new List<Service>();
-    public static List<Service> ServicesForDisplay => Services.Where(service => (service.Price > 0)).ToList(); 
+    public static IEnumerable<Service> ServicesForDisplay => Services.Where(service => (service.Price > 0)); 
 
     static ServiceCatalog()
     {

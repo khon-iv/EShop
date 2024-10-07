@@ -1,4 +1,6 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
+using System.Linq;
 using System.Xml;
 using EShop.Commands;
 
@@ -9,7 +11,7 @@ class EShop
     private static void Main(string[] args)
     {
         Console.WriteLine("EShop");
-        DisplayCommandsCommand.Execute();
+        DisplayCommandsCommand.Execute(null);
         while (true)
         {
             var command = Console.ReadLine();
@@ -25,57 +27,26 @@ class EShop
             return;
         }
         
-        var wordsOfCommand = command.Trim().Split(" ", StringSplitOptions.RemoveEmptyEntries);
+        var wordsOfCommand = command.Split(' ', StringSplitOptions.RemoveEmptyEntries);
         var commandName = wordsOfCommand[0];
-        var commandArgs = new string[wordsOfCommand.Length - 1];
-        Array.Copy(wordsOfCommand, 1, commandArgs, 0, wordsOfCommand.Length - 1);
+        var commandArgs = wordsOfCommand.Skip(1).ToArray();
 
         switch (commandName)
         {
             case DisplayCommandsCommand.Name:
-                if (commandArgs.Length == 0)
-                    DisplayCommandsCommand.Execute();
-                else
-                    Console.WriteLine($"Некорректное число аргументов для команды {commandName}");
+                DisplayCommandsCommand.Execute(commandArgs);
                 break;
             case ExitCommand.Name:
-                if (commandArgs.Length == 0)
-                    ExitCommand.Execute();
-                else
-                    Console.WriteLine($"Некорректное число аргументов для команды {commandName}");
+                ExitCommand.Execute(commandArgs);
                 break;
             case DisplayProducts.Name:
-                switch (commandArgs.Length)
-                {
-                    case 0:
-                        DisplayProducts.Execute();
-                        break;
-                    case 1:
-                        int.TryParse(commandArgs[0], out var num);
-                        DisplayProducts.Execute(num);
-                        break;
-                    default:
-                        Console.WriteLine($"Некорректное число аргументов для комманды {commandName}");
-                        break;
-                }
+                DisplayProducts.Execute(commandArgs);
                 break;
             case DisplayServices.Name:
-                switch (commandArgs.Length)
-                {
-                    case 0:
-                        DisplayServices.Execute();
-                        break;
-                    case 1:
-                        int.TryParse(commandArgs[0], out var num);
-                        DisplayServices.Execute(num);
-                        break;
-                    default:
-                        Console.WriteLine($"Некорректное число аргументов для комманды {commandName}");
-                        break;
-                }
+                DisplayServices.Execute(commandArgs);
                 break;
             default:
-                Console.WriteLine("Неизвестная команда (чтобы посмотреть все команды, используйте DisplayCommands)");
+                Console.WriteLine("Неизвестная команда (чтобы посмотреть все команды, введите DisplayCommands)");
                 break;
         }
     } 
