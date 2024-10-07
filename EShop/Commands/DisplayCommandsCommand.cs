@@ -8,6 +8,8 @@ public static class DisplayCommandsCommand
     public static void Execute()
     {
         Console.WriteLine($"{DisplayCommandsCommand.Name} - {DisplayCommandsCommand.Description}");
+        Console.WriteLine($"{DisplayProducts.Name} - {DisplayProducts.Description}");
+        Console.WriteLine($"{DisplayServices.Name} - {DisplayServices.Description}");
         Console.WriteLine($"{ExitCommand.Name} - {ExitCommand.Description}");
         Console.WriteLine();
     }

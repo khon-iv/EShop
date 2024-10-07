@@ -13,11 +13,11 @@ class EShop
         while (true)
         {
             var command = Console.ReadLine();
-            Execute(command!);
+            Execute(command);
         }
     }
 
-    private static void Execute(string command)
+    private static void Execute(string? command)
     {
         if (string.IsNullOrEmpty(command) || string.IsNullOrWhiteSpace(command)) 
         {
@@ -43,6 +43,36 @@ class EShop
                     ExitCommand.Execute();
                 else
                     Console.WriteLine($"Некорректное число аргументов для команды {commandName}");
+                break;
+            case DisplayProducts.Name:
+                switch (commandArgs.Length)
+                {
+                    case 0:
+                        DisplayProducts.Execute();
+                        break;
+                    case 1:
+                        int.TryParse(commandArgs[0], out var num);
+                        DisplayProducts.Execute(num);
+                        break;
+                    default:
+                        Console.WriteLine($"Некорректное число аргументов для комманды {commandName}");
+                        break;
+                }
+                break;
+            case DisplayServices.Name:
+                switch (commandArgs.Length)
+                {
+                    case 0:
+                        DisplayServices.Execute();
+                        break;
+                    case 1:
+                        int.TryParse(commandArgs[0], out var num);
+                        DisplayServices.Execute(num);
+                        break;
+                    default:
+                        Console.WriteLine($"Некорректное число аргументов для комманды {commandName}");
+                        break;
+                }
                 break;
             default:
                 Console.WriteLine("Неизвестная команда (чтобы посмотреть все команды, используйте DisplayCommands)");
