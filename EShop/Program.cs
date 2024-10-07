@@ -1,4 +1,6 @@
-﻿using EShop.Commands;
+﻿using System.Diagnostics;
+using System.Xml;
+using EShop.Commands;
 
 namespace Eshop;
 
@@ -31,10 +33,16 @@ class EShop
         switch (commandName)
         {
             case DisplayCommandsCommand.Name:
-                DisplayCommandsCommand.Execute();
+                if (commandArgs.Length == 0)
+                    DisplayCommandsCommand.Execute();
+                else
+                    Console.WriteLine($"Некорректное число аргументов для команды {commandName}");
                 break;
             case ExitCommand.Name:
-                ExitCommand.Execute();
+                if (commandArgs.Length == 0)
+                    ExitCommand.Execute();
+                else
+                    Console.WriteLine($"Некорректное число аргументов для команды {commandName}");
                 break;
             default:
                 Console.WriteLine("Неизвестная команда (чтобы посмотреть все команды, используйте DisplayCommands)");
