@@ -15,6 +15,8 @@ public class ApplicationContext
     private List<CatalogItem> _services = 
         Catalog.CatalogItems.Where(i => i.Item.Type == ItemTypes.Service).ToList();
     
+    private Cart _cart = new Cart();
+    
     public string ExecuteStartupCommand()
     {
         return ExecuteCommandByName(DisplayCommandsCommand.Name);
@@ -28,6 +30,7 @@ public class ApplicationContext
             ExitCommand.Name => ExitCommand.Execute(commandArgs),
             DisplayProductsCommand.Name => new DisplayProductsCommand(_products).Execute(commandArgs),
             DisplayServicesCommand.Name => new DisplayServicesCommand(_services).Execute(commandArgs),
+            DisplayCartCommand.Name => new DisplayCartCommand(_cart).Execute(commandArgs),
             var _ => "Неизвестная команда (чтобы посмотреть все команды, введите DisplayCommands)"
         };
     }
