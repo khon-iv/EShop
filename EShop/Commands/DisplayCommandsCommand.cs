@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace EShop.Commands;
 
@@ -7,17 +8,21 @@ public static class DisplayCommandsCommand
     public const string Name = "DisplayCommands";
     public const string Description = "показать все команды";
 
-    public static void Execute(string[]? args)
+    public static string Execute(string[]? args)
     {
-        if (args == null || args.Length == 0)
+        var lines = new string[]
         {
-            Console.WriteLine($"{DisplayCommandsCommand.Name} - {DisplayCommandsCommand.Description}");
-            Console.WriteLine($"{DisplayProducts.Name} - {DisplayProducts.Description}");
-            Console.WriteLine($"{DisplayServices.Name} - {DisplayServices.Description}");
-            Console.WriteLine($"{ExitCommand.Name} - {ExitCommand.Description}");
-            Console.WriteLine();
+            $"{DisplayCommandsCommand.Name} - {DisplayCommandsCommand.Description}",
+            $"{DisplayProductsCommand.Name} - {DisplayProductsCommand.Description}",
+            $"{DisplayServicesCommand.Name} - {DisplayServicesCommand.Description}",
+            $"{ExitCommand.Name} - {ExitCommand.Description}",
+        };
+        
+        if (args is null || args.Length == 0)
+        {
+            return String.Join('\n', lines);
         }
         else
-            Console.WriteLine($"Некорректное число аргументов для команды {Name}");
+            return $"Некорректное число аргументов для команды {Name}";
     }
 }

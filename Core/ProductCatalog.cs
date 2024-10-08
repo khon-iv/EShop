@@ -5,9 +5,9 @@ namespace Core;
 
 public static class ProductCatalog
 {
-    private static readonly List<Product> Products = new List<Product>();
-    public static IEnumerable<Product> ProductsForDisplay => 
-        Products.Where(p => p is { Remains: > 0, Price: > 0 });
+    private static readonly List<Product> Products = [];
+    public static List<Product> ProductsForDisplay => 
+        Products.Where(p => p is { Remains: > 0, Price: > 0 }).ToList();
 
     static ProductCatalog()
     {
@@ -47,7 +47,6 @@ public static class ProductCatalog
                 ProductCategories.TV,
                 1199
             ),
-            // не должен отображаться в каталоге, т.к. отстаток 0
             new Product(
                 4,
                 "14.1\" Ноутбук DEXP Aquilon серебристый",

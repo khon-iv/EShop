@@ -2,16 +2,19 @@
 using System.Diagnostics;
 using System.Linq;
 using System.Xml;
+using EShop;
 using EShop.Commands;
 
 namespace Eshop;
 
 class EShop
 {
+    private static readonly ApplicationContext Context = new();
     private static void Main(string[] args)
     {
-        Console.WriteLine("EShop");
-        DisplayCommandsCommand.Execute(null);
+        
+        Console.WriteLine(ApplicationContext.Title);
+        Console.WriteLine(Context.ExecuteStartupCommand() + '\n');
         while (true)
         {
             var command = Console.ReadLine();
@@ -31,23 +34,6 @@ class EShop
         var commandName = wordsOfCommand[0];
         var commandArgs = wordsOfCommand.Skip(1).ToArray();
 
-        switch (commandName)
-        {
-            case DisplayCommandsCommand.Name:
-                DisplayCommandsCommand.Execute(commandArgs);
-                break;
-            case ExitCommand.Name:
-                ExitCommand.Execute(commandArgs);
-                break;
-            case DisplayProducts.Name:
-                DisplayProducts.Execute(commandArgs);
-                break;
-            case DisplayServices.Name:
-                DisplayServices.Execute(commandArgs);
-                break;
-            default:
-                Console.WriteLine("Неизвестная команда (чтобы посмотреть все команды, введите DisplayCommands)");
-                break;
-        }
+        Console.WriteLine(Context.ExecuteCommandByName(commandName, commandArgs) + '\n');
     } 
 }

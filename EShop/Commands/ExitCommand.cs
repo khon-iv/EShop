@@ -7,11 +7,13 @@ public static class ExitCommand
     public const string Name = "Exit";
     public const string Description = "завершить";
 
-    public static void Execute(string[]? args)
+    public static string Execute(string[]? args)
     {
-        if (args == null || args.Length == 0)
+        if (args is null || args.Length == 0)
             System.Environment.Exit(0);
         else
-            Console.WriteLine($"Некорректное число аргументов для команды {Name}");
+            return $"Некорректное число аргументов для команды {Name}";
+        
+        return null;
     }
 }
