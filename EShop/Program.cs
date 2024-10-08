@@ -12,7 +12,6 @@ class EShop
     private static readonly ApplicationContext Context = new();
     private static void Main(string[] args)
     {
-        
         Console.WriteLine(ApplicationContext.Title);
         Console.WriteLine(Context.ExecuteStartupCommand() + '\n');
         while (true)

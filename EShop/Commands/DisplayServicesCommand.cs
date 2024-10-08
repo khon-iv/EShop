@@ -6,14 +6,14 @@ namespace EShop.Commands;
 
 public class DisplayServicesCommand
 {
-    private readonly List<Service> _services;
+    private readonly List<CatalogItem> _services;
     
     public const string Name = "DisplayServicesCommand";
     public const string Description = "показать услуги";
 
-    public DisplayServicesCommand(List<Service> services)
+    public DisplayServicesCommand(List<CatalogItem> services)
     {
-        _services = services;
+        _services = services.Where(s => s is {Item.Price: > 0}).ToList();
     }
     
     public string Execute(string[]? args)
@@ -34,10 +34,10 @@ public class DisplayServicesCommand
         var resultString = "";
         for (var i = 0; i < serviceCountForDisplay; i++)
         {
-            resultString += $"{_services[i].Name}\n" +
-                            $"Цена: {_services[i].Price}\n";
-            if (_services[i].Description != String.Empty)
-                resultString +=  $"Описание: {_services[i].Description}\n";
+            resultString += $"{_services[i].Item.Name}\n" +
+                            $"Цена: {_services[i].Item.Price}\n";
+            if (_services[i].Item.Description != String.Empty)
+                resultString +=  $"Описание: {_services[i].Item.Description}\n";
             if (i < serviceCountForDisplay - 1)
                 resultString += '\n';
         }

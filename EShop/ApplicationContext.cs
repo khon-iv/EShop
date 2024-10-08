@@ -10,8 +10,10 @@ public class ApplicationContext
 {
     public const string Title = "EShop";
 
-    private List<Product> _products = ProductCatalog.ProductsForDisplay;
-    private List<Service> _services = ServiceCatalog.ServicesForDisplay;
+    private List<CatalogItem> _products = 
+        Catalog.CatalogItems.Where(i => i.Item.Type == ItemTypes.Product).ToList();
+    private List<CatalogItem> _services = 
+        Catalog.CatalogItems.Where(i => i.Item.Type == ItemTypes.Service).ToList();
     
     public string ExecuteStartupCommand()
     {
