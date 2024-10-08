@@ -1,6 +1,6 @@
 ﻿namespace Core;
 
-public class Catalog
+public static class Catalog
 {
     public static List<CatalogItem> CatalogItems = GetItems();
 

@@ -10,7 +10,7 @@ public class CartLine
     /// <summary>
     /// Идентификатор линии
     /// </summary>
-    public int ItemID => _cartItem.Id;
+    public int Id => _cartItem.Id;
     
     /// <summary>
     /// Текст для отображения линии корзины
