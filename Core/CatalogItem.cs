@@ -11,7 +11,7 @@ public class CatalogItem
         get => _remains;
         set
         {
-            if ((Nomenclature.Type == NomenclatureTypes.Service) && (value != 1) || (value < 1))
+            if ((Nomenclature.Type == NomenclatureTypes.Service) && (value != 1) || (value < 0))
                 return;
             else
                 _remains = value;

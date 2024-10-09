@@ -12,18 +12,20 @@ public class DisplayCartCommand
     public DisplayCartCommand(Cart cart)
     {
         _cart = cart;
+        
+        /*_cart.AddItemToCart(Catalog.CatalogItems.First(i => i.Nomenclature.Id == 0).Nomenclature);
+        _cart.AddItemToCart(Catalog.CatalogItems.First(i => i.Nomenclature.Id == 2).Nomenclature);
+        _cart.AddItemToCart(Catalog.CatalogItems.First(i => i.Nomenclature.Id == 3).Nomenclature);
+        _cart.AddItemToCart(Catalog.CatalogItems.First(i => i.Nomenclature.Id == 0).Nomenclature);*/
     }
 
     public string Execute(string[]? args)
     {
-        ///
-        _cart.AddItemToCart(Catalog.CatalogItems.First(i => i.Nomenclature.Id == 0).Nomenclature);
-        _cart.AddItemToCart(Catalog.CatalogItems.First(i => i.Nomenclature.Id == 2).Nomenclature);
-        _cart.AddItemToCart(Catalog.CatalogItems.First(i => i.Nomenclature.Id == 3).Nomenclature);
-        _cart.AddItemToCart(Catalog.CatalogItems.First(i => i.Nomenclature.Id == 0).Nomenclature);
-        
         if (args is null || args.Length == 0)
         {
+            if (_cart.CartLines.Count == 0)
+                return "Корзина пустая";
+            
             // LINQ return _cart.CartLines.Aggregate("", (current, cartLine) => current + $"{cartLine.Text}\n");
             decimal totalPrice = 0;
             var resultString = "";

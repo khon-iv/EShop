@@ -14,25 +14,30 @@ public static class Methods
             }
         
         if (count < 1)
-        {
             return "Нельзя добавлять менее 1 товара";
-        }
         
         var catalogItemCount = Catalog.CatalogItems.First(i => i.Id == nomenclature.Id).Remains;
         if (catalogItemCount < 1)
-        {
             return "Товар закончился";
-        }
         
         count = catalogItemCount < count ? catalogItemCount : count;
         if (listOfItemLines.Select(x => x.Id).ToList().Contains(nomenclature.Id))
         {
             listOfItemLines.First(line => line.Id == nomenclature.Id).Count += count;
-            Catalog.CatalogItems.First(i => i.Id == nomenclature.Id).Remains -= count;
+            foreach (var catalogItem in Catalog.CatalogItems.Where(catalogItem => catalogItem.Nomenclature.Id == nomenclature.Id))
+            {
+                catalogItem.Remains -= count;
+                break;
+            }
         }
         else
         {
             listOfItemLines.Add(new ItemLine(nomenclature, count));
+            foreach (var catalogItem in Catalog.CatalogItems.Where(catalogItem => catalogItem.Nomenclature.Id == nomenclature.Id))
+            {
+                catalogItem.Remains -= count;
+                break;
+            }
         }
         
         return $"Товар {nomenclature.Name} добавлен в количестве {count}";

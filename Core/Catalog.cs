@@ -4,6 +4,11 @@ public static class Catalog
 {
     public static List<CatalogItem> CatalogItems = GetItems();
 
+    public static Nomenclature? getNomenclature(int nomenclatureId)
+    {
+        return CatalogItems.Find(x => x.Id == nomenclatureId)?.Nomenclature;
+    }
+
     private static List<CatalogItem> GetItems()
     {
         var items = new List<CatalogItem>();

@@ -16,6 +16,7 @@ public static class DisplayCommandsCommand
             $"{DisplayProductsCommand.Name} - {DisplayProductsCommand.Description}",
             $"{DisplayServicesCommand.Name} - {DisplayServicesCommand.Description}",
             $"{DisplayCartCommand.Name} - {DisplayCartCommand.Description}",
+            $"{AddItemToCartCommand.Name} - {AddItemToCartCommand.Description}",
             $"{ExitCommand.Name} - {ExitCommand.Description}",
         };
         

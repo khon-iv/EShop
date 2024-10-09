@@ -30,7 +30,9 @@ public class Order
 
     public string AddItemToOrder(Nomenclature nomenclature, int count = 1)
     {
-        return Methods.AddItemToContainer(OrderLines, nomenclature, count);
+        return 
+            $"Добавление в заказ {nomenclature.Name} в количестве {count}" +
+            $"{Methods.AddItemToContainer(OrderLines, nomenclature, count)}";
     }
 
     public string PaidOrder(decimal amount)

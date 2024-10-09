@@ -6,6 +6,8 @@ public class Cart
 
     public string AddItemToCart(Nomenclature nomenclature, int count = 1)
     {
-        return Methods.AddItemToContainer(CartLines, nomenclature, count);
+        return 
+            $"Добавление в корзину {nomenclature.Name} в количестве {count}...\n" +
+            $"{Methods.AddItemToContainer(CartLines, nomenclature, count)}";
     }
 }
