@@ -17,18 +17,23 @@ public class DisplayCartCommand
     public string Execute(string[]? args)
     {
         ///
-        _cart.AddCartLine(Catalog.CatalogItems.First(i => i.Item.Id == 0).Item);
-        _cart.AddCartLine(Catalog.CatalogItems.First(i => i.Item.Id == 2).Item);
-        _cart.AddCartLine(Catalog.CatalogItems.First(i => i.Item.Id == 3).Item);
-        _cart.AddCartLine(Catalog.CatalogItems.First(i => i.Item.Id == 0).Item);
+        _cart.AddCartLine(Catalog.CatalogItems.First(i => i.Nomenclature.Id == 0).Nomenclature);
+        _cart.AddCartLine(Catalog.CatalogItems.First(i => i.Nomenclature.Id == 2).Nomenclature);
+        _cart.AddCartLine(Catalog.CatalogItems.First(i => i.Nomenclature.Id == 3).Nomenclature);
+        _cart.AddCartLine(Catalog.CatalogItems.First(i => i.Nomenclature.Id == 0).Nomenclature);
         
         if (args is null || args.Length == 0)
         {
             // LINQ return _cart.CartLines.Aggregate("", (current, cartLine) => current + $"{cartLine.Text}\n");
+            decimal totalPrice = 0;
             var resultString = "";
             foreach (var cartLine in _cart.CartLines)
+            {
                 resultString += $"{cartLine.Text}\n";
-        
+                totalPrice += cartLine.CartNomenclature.Price * cartLine.Count;
+            }
+            resultString += $"Total price: {totalPrice}";
+            
             return resultString;
         }
         else 

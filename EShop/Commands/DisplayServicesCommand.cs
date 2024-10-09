@@ -13,7 +13,7 @@ public class DisplayServicesCommand
 
     public DisplayServicesCommand(List<CatalogItem> services)
     {
-        _services = services.Where(s => s is {Item.Price: > 0}).ToList();
+        _services = services.Where(s => s is {Nomenclature.Price: > 0}).ToList();
     }
     
     public string Execute(string[]? args)
@@ -34,10 +34,10 @@ public class DisplayServicesCommand
         var resultString = "";
         for (var i = 0; i < serviceCountForDisplay; i++)
         {
-            resultString += $"{_services[i].Item.Name}\n" +
-                            $"Цена: {_services[i].Item.Price}\n";
-            if (_services[i].Item.Description != String.Empty)
-                resultString +=  $"Описание: {_services[i].Item.Description}\n";
+            resultString += $"{_services[i].Nomenclature.Name}\n" +
+                            $"Цена: {_services[i].Nomenclature.Price}\n";
+            if (_services[i].Nomenclature.Description != String.Empty)
+                resultString +=  $"Описание: {_services[i].Nomenclature.Description}\n";
             if (i < serviceCountForDisplay - 1)
                 resultString += '\n';
         }

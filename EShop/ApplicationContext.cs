@@ -11,9 +11,9 @@ public class ApplicationContext
     public const string Title = "EShop";
 
     private List<CatalogItem> _products = 
-        Catalog.CatalogItems.Where(i => i.Item.Type == ItemTypes.Product).ToList();
+        Catalog.CatalogItems.Where(i => i.Nomenclature.Type == NomenclatureTypes.Product).ToList();
     private List<CatalogItem> _services = 
-        Catalog.CatalogItems.Where(i => i.Item.Type == ItemTypes.Service).ToList();
+        Catalog.CatalogItems.Where(i => i.Nomenclature.Type == NomenclatureTypes.Service).ToList();
     
     private Cart _cart = new Cart();
     

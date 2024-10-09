@@ -4,18 +4,18 @@
 /// </summary>
 public class CartLine
 {
-    private readonly Item _cartItem;
+    public readonly Nomenclature CartNomenclature;
     private int _count;
     
     /// <summary>
     /// Идентификатор линии
     /// </summary>
-    public int Id => _cartItem.Id;
+    public int Id => CartNomenclature.Id;
     
     /// <summary>
     /// Текст для отображения линии корзины
     /// </summary>
-    public string Text => $"{_cartItem.Name} | {Count}";
+    public string Text => $"{CartNomenclature.Name} | {Count} | {CartNomenclature.Price} | {CartNomenclature.Price * Count}";
     
     /// <summary>
     /// Количество элементов в линии корзины
@@ -25,15 +25,15 @@ public class CartLine
         get => _count;
         set
         {
-            if (((_cartItem.Type == ItemTypes.Service) && (value > 1)) || value < 1)
+            if (((CartNomenclature.Type == NomenclatureTypes.Service) && (value > 1)) || value < 1)
                 return;
             _count = value;
         }
     }
     
-    public CartLine(Item item, int count)
+    public CartLine(Nomenclature nomenclature, int count)
     {
-        _cartItem = item;
+        CartNomenclature = nomenclature;
         Count = count;
     }
 }

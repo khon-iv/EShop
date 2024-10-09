@@ -1,6 +1,6 @@
 ﻿namespace Core;
 
-public enum ItemTypes
+public enum NomenclatureTypes
 {
     /// <summary>
     /// Товар

@@ -1,19 +1,19 @@
 ﻿namespace Core;
 
-public class Item
+public class Nomenclature
 {
     public int Id { get; }
     public string Name { get; }
     public decimal Price { get; }
-    public ItemTypes Type { get; }
+    public NomenclatureTypes Type { get; }
     public string Description { get; }
     
-    public Item(int id, string name, decimal price, ItemTypes itemType, string description = "")
+    public Nomenclature(int id, string name, decimal price, NomenclatureTypes nomenclatureType, string description = "")
     {
         Id = id;
         Name = name;
         Price = price;
-        Type = itemType;
+        Type = nomenclatureType;
         Description = description;
     }
 }

@@ -13,7 +13,7 @@ public class DisplayProductsCommand
 
     public DisplayProductsCommand(List<CatalogItem> products)
     {
-        _products = products.Where(p => p is {Remains: > 0, Item.Price: > 0}).ToList();
+        _products = products.Where(p => p is {Remains: > 0, Nomenclature.Price: > 0}).ToList();
     }
     
     public string Execute(string[]? args)
@@ -34,11 +34,11 @@ public class DisplayProductsCommand
         var resultString = "";
         for (var i = 0; i < productCountForDisplay; i++)
         {
-            resultString += $"{_products[i].Item.Name}\n" +
-                   $"Цена: {_products[i].Item.Price}\n" +
+            resultString += $"{_products[i].Nomenclature.Name}\n" +
+                   $"Цена: {_products[i].Nomenclature.Price}\n" +
                    $"Остаток: {_products[i].Remains}\n";
-            if (_products[i].Item.Description != String.Empty)
-                resultString += $"Описание: {_products[i].Item.Description}\n";
+            if (_products[i].Nomenclature.Description != String.Empty)
+                resultString += $"Описание: {_products[i].Nomenclature.Description}\n";
             if (i < productCountForDisplay - 1)
                 resultString += '\n';
         }
