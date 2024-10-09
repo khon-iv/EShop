@@ -17,10 +17,10 @@ public class DisplayCartCommand
     public string Execute(string[]? args)
     {
         ///
-        _cart.AddCartLine(Catalog.CatalogItems.First(i => i.Nomenclature.Id == 0).Nomenclature);
-        _cart.AddCartLine(Catalog.CatalogItems.First(i => i.Nomenclature.Id == 2).Nomenclature);
-        _cart.AddCartLine(Catalog.CatalogItems.First(i => i.Nomenclature.Id == 3).Nomenclature);
-        _cart.AddCartLine(Catalog.CatalogItems.First(i => i.Nomenclature.Id == 0).Nomenclature);
+        _cart.AddItemToCart(Catalog.CatalogItems.First(i => i.Nomenclature.Id == 0).Nomenclature);
+        _cart.AddItemToCart(Catalog.CatalogItems.First(i => i.Nomenclature.Id == 2).Nomenclature);
+        _cart.AddItemToCart(Catalog.CatalogItems.First(i => i.Nomenclature.Id == 3).Nomenclature);
+        _cart.AddItemToCart(Catalog.CatalogItems.First(i => i.Nomenclature.Id == 0).Nomenclature);
         
         if (args is null || args.Length == 0)
         {
@@ -29,8 +29,9 @@ public class DisplayCartCommand
             var resultString = "";
             foreach (var cartLine in _cart.CartLines)
             {
-                resultString += $"{cartLine.Text}\n";
-                totalPrice += cartLine.CartNomenclature.Price * cartLine.Count;
+                resultString += $"{cartLine.ItemNomenclature.Name} | {cartLine.Count} | " +
+                                $"{cartLine.ItemNomenclature.Price} | {cartLine.ItemNomenclature.Price * cartLine.Count}\n";
+                totalPrice += cartLine.ItemNomenclature.Price * cartLine.Count;
             }
             resultString += $"Total price: {totalPrice}";
             
