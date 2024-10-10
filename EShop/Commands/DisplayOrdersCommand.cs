@@ -2,11 +2,24 @@
 
 namespace EShop.Commands;
 
+/// <summary>
+/// Команда отображения активных заказов
+/// </summary>
 public class DisplayOrdersCommand(List<Order> orders)
 {
+    /// <summary>
+    /// Наименование команды
+    /// </summary>
     public const string Name = "DisplayOrdersCommand";
+    
+    /// <summary>
+    /// Описание команды
+    /// </summary>
     public const string Description = "показать активные заказы";
 
+    /// <summary>
+    /// Выполнить команду
+    /// </summary>
     public string Execute(string[]? args)
     {
         if (args is null || args.Length == 0)

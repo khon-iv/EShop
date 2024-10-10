@@ -1,14 +1,26 @@
 ﻿namespace Core;
 
+/// <summary>
+/// Каталог
+/// </summary>
 public static class Catalog
 {
-    public static List<CatalogItem> CatalogItems = GetItems();
+    /// <summary>
+    /// Список элементов каталога
+    /// </summary>
+    public static readonly List<CatalogItem> CatalogItems = GetItems();
 
-    public static Nomenclature? getNomenclature(int nomenclatureId)
+    /// <summary>
+    /// Получить номенклатуру из каталога по id
+    /// </summary>
+    public static Nomenclature? GetNomenclatureById(int nomenclatureId)
     {
         return CatalogItems.Find(x => x.Id == nomenclatureId)?.Nomenclature;
     }
 
+    /// <summary>
+    /// Получить элементы каталога
+    /// </summary>
     private static List<CatalogItem> GetItems()
     {
         var items = new List<CatalogItem>();

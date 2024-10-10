@@ -2,7 +2,10 @@
 
 public static class Methods
 {
-    public static string AddItemToContainer(List<ItemLine> listOfItemLines, Nomenclature nomenclature, int count = 1)
+    /// <summary>
+    /// Добавить элементы в список
+    /// </summary>
+    public static string AddItemsToContainer(List<ItemLine> listOfItemLines, Nomenclature nomenclature, int count = 1)
     {
         if (nomenclature.Type == NomenclatureTypes.Service)
             if (listOfItemLines.Select(line => line.Id).ToList().Contains(nomenclature.Id))

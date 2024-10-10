@@ -7,7 +7,7 @@ using EShop.Commands;
 
 namespace Eshop;
 
-class EShop
+class Program
 {
     private static readonly ApplicationContext Context = new();
     private static void Main(string[] args)
@@ -21,6 +21,9 @@ class EShop
         }
     }
 
+    /// <summary>
+    /// Выполнить команду
+    /// </summary>
     private static void Execute(string? command)
     {
         if (string.IsNullOrEmpty(command) || string.IsNullOrWhiteSpace(command)) 

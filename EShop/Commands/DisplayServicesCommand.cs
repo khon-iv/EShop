@@ -4,11 +4,21 @@ using Core;
 
 namespace EShop.Commands;
 
+/// <summary>
+/// Команда отображения услуг
+/// </summary>
 public class DisplayServicesCommand
 {
     private readonly List<CatalogItem> _services;
     
+    /// <summary>
+    /// Наименование команды
+    /// </summary>
     public const string Name = "DisplayServicesCommand";
+    
+    /// <summary>
+    /// Описание команды
+    /// </summary>
     public const string Description = "показать услуги";
 
     public DisplayServicesCommand(List<CatalogItem> services)
@@ -16,6 +26,9 @@ public class DisplayServicesCommand
         _services = services.Where(s => s is {Nomenclature.Price: > 0}).ToList();
     }
     
+    /// <summary>
+    /// Выполнить команду
+    /// </summary>
     public string Execute(string[]? args)
     {
         int serviceCountForDisplay = 0;

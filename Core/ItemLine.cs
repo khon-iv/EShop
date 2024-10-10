@@ -1,6 +1,7 @@
 ﻿namespace Core;
+
 /// <summary>
-/// Линия корзины
+/// Линия корзины/заказа
 /// </summary>
 public class ItemLine
 {

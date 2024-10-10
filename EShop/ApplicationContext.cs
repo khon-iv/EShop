@@ -6,18 +6,30 @@ using EShop.Commands;
 
 namespace EShop;
 
+/// <summary>
+/// Контекст сеанса работы приложения
+/// </summary>
 public class ApplicationContext
 {
+    /// <summary>
+    /// Заголовок
+    /// </summary>
     public const string Title = "EShop";
     
     private readonly Cart _cart = new Cart();
     private readonly List<Order> _orders = [];
     
+    /// <summary>
+    /// Выполнить стартовую комманду
+    /// </summary>
     public string ExecuteStartupCommand()
     {
         return ExecuteCommandByName(DisplayCommandsCommand.Name);
     }
 
+    /// <summary>
+    /// Выполнить команду по наименованию
+    /// </summary>
     public string ExecuteCommandByName(string commandName, string[]? commandArgs = null)
     {
         var products = 

@@ -4,11 +4,21 @@ using Core;
 
 namespace EShop.Commands;
 
+/// <summary>
+/// Команда отображения товаров
+/// </summary>
 public class DisplayProductsCommand
 {
     private readonly List<CatalogItem> _products;
     
+    /// <summary>
+    /// Наименование команды
+    /// </summary>
     public const string Name = "DisplayProductsCommand";
+    
+    /// <summary>
+    /// Описание команды
+    /// </summary>
     public const string Description = "показать товары";
 
     public DisplayProductsCommand(List<CatalogItem> products)
@@ -16,6 +26,9 @@ public class DisplayProductsCommand
         _products = products.Where(p => p is {Remains: > 0, Nomenclature.Price: > 0}).ToList();
     }
     
+    /// <summary>
+    /// Выполнить команду
+    /// </summary>
     public string Execute(string[]? args)
     {
         var productCountForDisplay = 0;

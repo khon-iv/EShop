@@ -1,10 +1,23 @@
 ﻿namespace Core;
 
+/// <summary>
+/// Элемент каталога
+/// </summary>
 public class CatalogItem
 {
+    /// <summary>
+    /// Идентификатор линии
+    /// </summary>
     public int Id { get; }
+    
+    /// <summary>
+    /// Номенклатура элемента каталога
+    /// </summary>
     public Nomenclature Nomenclature { get; }
 
+    /// <summary>
+    /// Количесво остатков номенклатуры
+    /// </summary>
     private int _remains;
     public int Remains
     {

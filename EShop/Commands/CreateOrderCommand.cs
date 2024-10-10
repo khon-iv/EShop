@@ -2,11 +2,24 @@
 
 namespace EShop.Commands;
 
+/// <summary>
+/// Команда создания заказа
+/// </summary>
 public class CreateOrderCommand(List<Order> orders, Cart cart)
 {
+    /// <summary>
+    /// Наименование команды
+    /// </summary>
     public const string Name = "CreateOrderCommand";
+    
+    /// <summary>
+    /// Описание команды
+    /// </summary>
     public const string Description = "создать заказ";
 
+    /// <summary>
+    /// Выполнить команду
+    /// </summary>
     public string Execute(string[]? args = null)
     {
         if (args is null || args.Length == 0)
