@@ -11,6 +11,7 @@ public class ApplicationContext
     public const string Title = "EShop";
     
     private Cart _cart = new Cart();
+    private List<Order> _orders = new List<Order>();
     
     public string ExecuteStartupCommand()
     {
@@ -31,6 +32,7 @@ public class ApplicationContext
             DisplayProductsCommand.Name => new DisplayProductsCommand(products).Execute(commandArgs),
             DisplayServicesCommand.Name => new DisplayServicesCommand(services).Execute(commandArgs),
             AddItemToCartCommand.Name => new AddItemToCartCommand(_cart).Execute(commandArgs),
+            CreateOrderCommand.Name => new CreateOrderCommand(_orders, _cart).Execute(commandArgs),
             DisplayCartCommand.Name => new DisplayCartCommand(_cart).Execute(commandArgs),
             var _ => "Неизвестная команда (чтобы посмотреть все команды, введите DisplayCommands)"
         };
