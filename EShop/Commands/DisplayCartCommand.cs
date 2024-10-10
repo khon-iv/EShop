@@ -2,42 +2,23 @@
 
 namespace EShop.Commands;
 
-public class DisplayCartCommand
+public class DisplayCartCommand(Cart cart)
 {
-    private readonly Cart _cart;
-    
     public const string Name = "DisplayCartCommand";
     public const string Description = "показать корзину";
-
-    public DisplayCartCommand(Cart cart)
-    {
-        _cart = cart;
-        
-        /*_cart.AddItemToCart(Catalog.CatalogItems.First(i => i.Nomenclature.Id == 0).Nomenclature);
-        _cart.AddItemToCart(Catalog.CatalogItems.First(i => i.Nomenclature.Id == 2).Nomenclature);
-        _cart.AddItemToCart(Catalog.CatalogItems.First(i => i.Nomenclature.Id == 3).Nomenclature);
-        _cart.AddItemToCart(Catalog.CatalogItems.First(i => i.Nomenclature.Id == 0).Nomenclature);*/
-    }
 
     public string Execute(string[]? args)
     {
         if (args is null || args.Length == 0)
         {
-            if (_cart.CartLines.Count == 0)
+            if (cart.CartLines.Count == 0)
                 return "Корзина пустая";
             
-            // LINQ return _cart.CartLines.Aggregate("", (current, cartLine) => current + $"{cartLine.Text}\n");
-            decimal totalPrice = 0;
-            var resultString = "";
-            foreach (var cartLine in _cart.CartLines)
-            {
-                resultString += $"{cartLine.ItemNomenclature.Name} | {cartLine.Count} | " +
-                                $"{cartLine.ItemNomenclature.Price} | {cartLine.ItemNomenclature.Price * cartLine.Count}\n";
-                totalPrice += cartLine.ItemNomenclature.Price * cartLine.Count;
-            }
-            resultString += $"Total price: {totalPrice}";
-            
-            return resultString;
+            return cart.CartLines.Aggregate("", (currentLine, nextLine) 
+                => currentLine + ($"{nextLine.ItemNomenclature.Name} | {nextLine.Count} | " +
+                                  $"{nextLine.ItemNomenclature.Price} | " +
+                                  $"{nextLine.ItemNomenclature.Price * nextLine.Count}\n")) +
+                   $"Сумма итого: {cart.CartTotalPrice}\n";
         }
         else 
             return $"Некорректное число аргументов для команды {Name}";

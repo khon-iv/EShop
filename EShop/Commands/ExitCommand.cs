@@ -14,6 +14,6 @@ public static class ExitCommand
         else
             return $"Некорректное число аргументов для команды {Name}";
         
-        return String.Empty;
+        return string.Empty;
     }
 }

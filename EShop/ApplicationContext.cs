@@ -10,8 +10,8 @@ public class ApplicationContext
 {
     public const string Title = "EShop";
     
-    private Cart _cart = new Cart();
-    private List<Order> _orders = new List<Order>();
+    private readonly Cart _cart = new Cart();
+    private readonly List<Order> _orders = [];
     
     public string ExecuteStartupCommand()
     {
@@ -33,6 +33,7 @@ public class ApplicationContext
             DisplayServicesCommand.Name => new DisplayServicesCommand(services).Execute(commandArgs),
             AddItemToCartCommand.Name => new AddItemToCartCommand(_cart).Execute(commandArgs),
             CreateOrderCommand.Name => new CreateOrderCommand(_orders, _cart).Execute(commandArgs),
+            DisplayOrdersCommand.Name => new DisplayOrdersCommand(_orders).Execute(commandArgs),
             DisplayCartCommand.Name => new DisplayCartCommand(_cart).Execute(commandArgs),
             var _ => "Неизвестная команда (чтобы посмотреть все команды, введите DisplayCommands)"
         };

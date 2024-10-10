@@ -2,17 +2,10 @@
 
 namespace EShop.Commands;
 
-public class AddItemToCartCommand
+public class AddItemToCartCommand(Cart cart)
 {
-    private readonly Cart _cart;
-    
     public const string Name = "AddItemToCartCommand";
     public const string Description = "показать корзину";
-
-    public AddItemToCartCommand(Cart cart)
-    {
-        _cart = cart;
-    }
 
     public string Execute(string[]? args)
     {
@@ -29,10 +22,10 @@ public class AddItemToCartCommand
                 return $"Для команды {Name} в качестве второго аргумента необходимо указать количество (число)";
             else return 
                 Catalog.getNomenclature(itemId) is null ? $"Номенклатура не найдена" : 
-                    _cart.AddItemToCart(Catalog.getNomenclature(itemId)!, count);
+                    cart.AddItemToCart(Catalog.getNomenclature(itemId)!, count);
         
         return 
             Catalog.getNomenclature(itemId) is null ? $"Номенклатура не найдена" : 
-                _cart.AddItemToCart(Catalog.getNomenclature(itemId)!);
+                cart.AddItemToCart(Catalog.getNomenclature(itemId)!);
     }
 }

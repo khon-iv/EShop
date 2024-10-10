@@ -1,9 +1,9 @@
 ﻿namespace Core;
 
-public class Order
+public class Order(int orderId, Cart cart)
 {
-    public int OrderId { get; }
-    public List<ItemLine> OrderLines { get; set; }
+    public int OrderId { get; } = orderId;
+    public List<ItemLine> OrderLines { get; set; } = cart.CartLines;
 
     public OrderStatuses Status
     {
@@ -11,22 +11,16 @@ public class Order
         {
             if (PaymentAmount == 0)
                 return OrderStatuses.NotPaid;
-            else if (PaymentAmount == OrderTotal)
+            else if (PaymentAmount == OrderTotalPrice)
                 return OrderStatuses.Paid;
             else
                 return OrderStatuses.PartiallyPaid;
         }
     }
 
-    public decimal OrderTotal => OrderLines.Select(line => line.ItemNomenclature.Price * line.Count).ToList().Sum();
+    public decimal OrderTotalPrice => OrderLines.Select(line => line.ItemNomenclature.Price * line.Count).ToList().Sum();
 
     public decimal PaymentAmount = 0;
-
-    public Order(int orderId, Cart cart)
-    {
-        OrderId = orderId;
-        OrderLines = cart.CartLines;
-    }
 
     public string AddItemToOrder(Nomenclature nomenclature, int count = 1)
     {
@@ -37,18 +31,17 @@ public class Order
 
     public string PaidOrder(decimal amount)
     {
-        if (OrderTotal > amount + PaymentAmount)
+        if (OrderTotalPrice > amount + PaymentAmount)
         {
-            var change = amount + PaymentAmount - OrderTotal;
+            var change = amount + PaymentAmount - OrderTotalPrice;
             amount -= change;
             
             return $"Заказ полностью оплачен, сдача: {change}";
         }
         
         PaymentAmount += amount;
-        if (PaymentAmount == OrderTotal)
-            return "Заказ полностью оплачен";
-        else
-            return $"Оплата принята, необходимо внести еще {OrderTotal - PaymentAmount}";
+        return PaymentAmount == OrderTotalPrice ? 
+            "Заказ полностью оплачен" : 
+            $"Оплата принята, необходимо внести еще {OrderTotalPrice - PaymentAmount}";
     }
 }

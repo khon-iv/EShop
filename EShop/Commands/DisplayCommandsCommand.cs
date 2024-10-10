@@ -18,6 +18,7 @@ public static class DisplayCommandsCommand
             $"{DisplayCartCommand.Name} - {DisplayCartCommand.Description}",
             $"{AddItemToCartCommand.Name} - {AddItemToCartCommand.Description}",
             $"{CreateOrderCommand.Name} - {CreateOrderCommand.Description}",
+            $"{DisplayOrdersCommand.Name} - {DisplayOrdersCommand.Description}",
             $"{ExitCommand.Name} - {ExitCommand.Description}",
         };
         

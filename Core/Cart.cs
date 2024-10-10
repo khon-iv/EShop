@@ -2,7 +2,9 @@
 
 public class Cart
 {
-    public List<ItemLine> CartLines { get; set; } = new List<ItemLine>();
+    public List<ItemLine> CartLines { get; set; } = [];
+    
+    public decimal CartTotalPrice => CartLines.Select(line => line.ItemNomenclature.Price * line.Count).ToList().Sum();
 
     public string AddItemToCart(Nomenclature nomenclature, int count = 1)
     {
