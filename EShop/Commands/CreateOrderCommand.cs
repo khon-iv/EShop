@@ -27,7 +27,7 @@ public class CreateOrderCommand(List<Order> orders, Cart cart)
             if (cart.CartLines.Count == 0)
                 return "Невозможно создать заказ: в корзине ничего нет.";
             
-            orders.Add(new Order(orders.Count == 0 ? 0 : orders.Last().OrderId + 1, cart));
+            orders.Add(new Order(GenerateOrderId(), cart));
 
             cart.CartLines = [];
             
@@ -36,4 +36,6 @@ public class CreateOrderCommand(List<Order> orders, Cart cart)
         else
             return $"Некорректное число аргументов для команды {Name}";
     }
+    
+    private int GenerateOrderId() => orders.Count > 0 ? orders.Last().OrderId + 1 : 0;
 }
