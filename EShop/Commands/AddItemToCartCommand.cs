@@ -15,7 +15,7 @@ public class AddItemToCartCommand(Cart cart)
     /// <summary>
     /// Описание команды
     /// </summary>
-    public const string Description = "показать корзину";
+    public const string Description = "добавить элемент в корзину";
 
     /// <summary>
     /// Выполнить команду

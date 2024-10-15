@@ -13,7 +13,7 @@ class Program
     private static void Main(string[] args)
     {
         Console.WriteLine(ApplicationContext.Title);
-        Console.WriteLine(Context.ExecuteStartupCommand() + '\n');
+        Console.WriteLine(Context.ExecuteStartupCommand() + $"{Environment.NewLine}");
         while (true)
         {
             var command = Console.ReadLine();
@@ -36,6 +36,6 @@ class Program
         var commandName = wordsOfCommand[0];
         var commandArgs = wordsOfCommand.Skip(1).ToArray();
 
-        Console.WriteLine(Context.ExecuteCommandByName(commandName, commandArgs) + '\n');
+        Console.WriteLine(Context.ExecuteCommandByName(commandName, commandArgs) + $"{Environment.NewLine}");
     } 
 }

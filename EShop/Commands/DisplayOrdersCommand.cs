@@ -1,4 +1,5 @@
-﻿using Core;
+﻿using System.Text;
+using Core;
 
 namespace EShop.Commands;
 
@@ -27,21 +28,21 @@ public class DisplayOrdersCommand(List<Order> orders)
             if (orders.Count == 0)
                 return "Нет активных заказов";
             
-            var resultString = "";
+            var resultString = new StringBuilder();
             var orderIndex = 1;
             foreach (var order in orders)
             {
-                resultString += $"\nЗаказ {orderIndex}\n" + 
+                resultString.Append($"{Environment.NewLine}Заказ {orderIndex}{Environment.NewLine}" + 
                                 order.OrderLines.Aggregate("", (currentLine, nextLine) => currentLine +
                                                             $"{nextLine.ItemNomenclature.Name} | {nextLine.Count} | " +
                                                             $"{nextLine.ItemNomenclature.Price} | " +
-                                                            $"{nextLine.ItemNomenclature.Price * nextLine.Count}\n") +
-                                $"Сумма итого: {order.OrderTotalPrice}\n" +
-                                $"Оплачено: {order.PaymentAmount}\n";
+                                                            $"{nextLine.ItemNomenclature.Price * nextLine.Count}{Environment.NewLine}") +
+                                $"Сумма итого: {order.OrderTotalPrice}{Environment.NewLine}" +
+                                $"Оплачено: {order.PaymentAmount}{Environment.NewLine}");
                 orderIndex++;
             }
             
-            return resultString;
+            return resultString.ToString();
         }
         else 
             return $"Некорректное число аргументов для команды {Name}";

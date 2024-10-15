@@ -37,7 +37,7 @@ public static class DisplayCommandsCommand
                 $"{ExitCommand.Name} - {ExitCommand.Description}",
             };
             
-            return string.Join('\n', lines);
+            return string.Join($"{Environment.NewLine}", lines);
         }
         else
             return $"Некорректное число аргументов для команды {Name}";

@@ -30,8 +30,8 @@ public class DisplayCartCommand(Cart cart)
             return cart.CartLines.Aggregate("", (currentLine, nextLine) 
                 => currentLine + ($"{nextLine.ItemNomenclature.Name} | {nextLine.Count} | " +
                                   $"{nextLine.ItemNomenclature.Price} | " +
-                                  $"{nextLine.ItemNomenclature.Price * nextLine.Count}\n")) +
-                   $"Сумма итого: {cart.CartTotalPrice}\n";
+                                  $"{nextLine.ItemNomenclature.Price * nextLine.Count}{Environment.NewLine}")) +
+                   $"Сумма итого: {cart.CartTotalPrice}{Environment.NewLine}";
         }
         else 
             return $"Некорректное число аргументов для команды {Name}";

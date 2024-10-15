@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Text;
 using Core;
 
 namespace EShop.Commands;
@@ -44,18 +45,18 @@ public class DisplayProductsCommand
         if ((productCountForDisplay < 1) || (productCountForDisplay > _products.Count))
             productCountForDisplay = _products.Count;
         
-        var resultString = "";
+        var resultString = new StringBuilder();
         for (var i = 0; i < productCountForDisplay; i++)
         {
-            resultString += $"{_products[i].Nomenclature.Name}\n" +
-                   $"Цена: {_products[i].Nomenclature.Price}\n" +
-                   $"Остаток: {_products[i].Remains}\n";
+            resultString.Append($"{_products[i].Nomenclature.Name}{Environment.NewLine}" +
+                   $"Цена: {_products[i].Nomenclature.Price}{Environment.NewLine}" +
+                   $"Остаток: {_products[i].Remains}{Environment.NewLine}");
             if (_products[i].Nomenclature.Description != String.Empty)
-                resultString += $"Описание: {_products[i].Nomenclature.Description}\n";
+                resultString.Append($"Описание: {_products[i].Nomenclature.Description}{Environment.NewLine}");
             if (i < productCountForDisplay - 1)
-                resultString += '\n';
+                resultString.Append($"{Environment.NewLine}");
         }
         
-        return resultString;
+        return resultString.ToString();
     }
 }

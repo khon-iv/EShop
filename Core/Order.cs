@@ -1,4 +1,6 @@
-﻿namespace Core;
+﻿using System.Text;
+
+namespace Core;
 
 /// <summary>
 /// Заказ
@@ -13,7 +15,7 @@ public class Order(int orderId, Cart cart)
     /// <summary>
     /// Линия заказа
     /// </summary>
-    public List<ItemLine> OrderLines { get; set; } = cart.CartLines;
+    public List<ItemLine> OrderLines { get; } = cart.CartLines;
     
     /// <summary>
     /// Статус оплаты заказа
@@ -46,9 +48,36 @@ public class Order(int orderId, Cart cart)
     /// </summary>
     public string AddItemToOrder(Nomenclature nomenclature, int count = 1)
     {
-        return 
-            $"Добавление в заказ {nomenclature.Name} в количестве {count}" +
-            $"{Methods.AddItemsToContainer(OrderLines, nomenclature, count)}";
+        var resultString = new StringBuilder($"Добавление в заказ {nomenclature.Name} в количестве {count}...{Environment.NewLine}");
+        if (nomenclature.Type == NomenclatureTypes.Service)
+            if (OrderLines.Select(line => line.Id).ToList().Contains(nomenclature.Id))
+                return resultString.Append("Данная услуга уже добавлена в заказ").ToString();
+            else
+            {
+                OrderLines.Add(new ItemLine(nomenclature, 1));
+                return resultString.Append($"Услуга {nomenclature.Name} добавлена в заказ").ToString();
+            }
+        
+        if (count < 1)
+            return resultString.Append("Нельзя добавлять менее 1 товара").ToString();
+        
+        var catalogItemCount = Catalog.CatalogItems.First(i => i.Id == nomenclature.Id).Remains;
+        if (catalogItemCount < 1)
+            return resultString.Append("Товар закончился").ToString();
+        
+        count = catalogItemCount < count ? catalogItemCount : count;
+        if (OrderLines.Select(x => x.Id).ToList().Contains(nomenclature.Id))
+        {
+            OrderLines.First(line => line.Id == nomenclature.Id).Count += count;
+            Catalog.CatalogItems.First(catalogItem => catalogItem.Nomenclature.Id == nomenclature.Id).Remains -= count;
+        }
+        else
+        {
+            OrderLines.Add(new ItemLine(nomenclature, count));
+            Catalog.CatalogItems.First(catalogItem => catalogItem.Nomenclature.Id == nomenclature.Id).Remains -= count;
+        }
+
+        return resultString.Append($"Товар {nomenclature.Name} добавлен в заказ в количестве {count}").ToString();
     }
 
     /// <summary>

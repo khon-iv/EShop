@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Text;
 using Core;
 
 namespace EShop.Commands;
@@ -44,17 +45,17 @@ public class DisplayServicesCommand
         if ((serviceCountForDisplay < 1) || (serviceCountForDisplay > _services.Count))
             serviceCountForDisplay = _services.Count;
 
-        var resultString = "";
+        var resultString = new StringBuilder();
         for (var i = 0; i < serviceCountForDisplay; i++)
         {
-            resultString += $"{_services[i].Nomenclature.Name}\n" +
-                            $"Цена: {_services[i].Nomenclature.Price}\n";
-            if (_services[i].Nomenclature.Description != String.Empty)
-                resultString +=  $"Описание: {_services[i].Nomenclature.Description}\n";
+            resultString.Append($"{_services[i].Nomenclature.Name}{Environment.NewLine}" +
+                            $"Цена: {_services[i].Nomenclature.Price}{Environment.NewLine}");
+            if (_services[i].Nomenclature.Description != string.Empty)
+                resultString.Append($"Описание: {_services[i].Nomenclature.Description}{Environment.NewLine}");
             if (i < serviceCountForDisplay - 1)
-                resultString += '\n';
+                resultString.Append($"{Environment.NewLine}");
         }
         
-        return resultString;
+        return resultString.ToString();
     }
 }
