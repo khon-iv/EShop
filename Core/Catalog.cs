@@ -13,18 +13,15 @@ public static class Catalog
     /// <summary>
     /// Получить номенклатуру из каталога по id
     /// </summary>
-    public static Nomenclature? GetNomenclatureById(int nomenclatureId)
-    {
-        return CatalogItems.Find(x => x.Id == nomenclatureId)?.Nomenclature;
-    }
+    public static Nomenclature? GetNomenclatureById(int nomenclatureId) =>
+        CatalogItems.Find(x => x.Id == nomenclatureId)?.Nomenclature;
 
     /// <summary>
     /// Получить элементы каталога
     /// </summary>
     private static List<CatalogItem> GetItems()
     {
-        var items = new List<CatalogItem>();
-        items.AddRange(new List<CatalogItem>
+        var items = new List<CatalogItem>
         {
             new CatalogItem(
                 new Nomenclature(
@@ -120,7 +117,7 @@ public static class Catalog
                     NomenclatureTypes.Service
                     )
                 )
-        });
+        };
         
         return items;
     }

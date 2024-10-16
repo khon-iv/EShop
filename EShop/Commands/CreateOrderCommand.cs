@@ -16,6 +16,11 @@ public class CreateOrderCommand(List<Order> orders, Cart cart)
     /// Описание команды
     /// </summary>
     public const string Description = "создать заказ";
+    
+    /// <summary>
+    /// Сгенерировать Id заказа
+    /// </summary>
+    private int GenerateOrderId() => orders.Count > 0 ? orders.Last().OrderId + 1 : 0;
 
     /// <summary>
     /// Выполнить команду
@@ -36,6 +41,4 @@ public class CreateOrderCommand(List<Order> orders, Cart cart)
         else
             return $"Некорректное число аргументов для команды {Name}";
     }
-    
-    private int GenerateOrderId() => orders.Count > 0 ? orders.Last().OrderId + 1 : 0;
 }
